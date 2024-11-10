@@ -36,10 +36,10 @@
         </label>
       </form>
 
-      <button>
+      <aside role="region" aria-live="polite">
         Hash color
         <pre></pre>
-      </button>
+      </aside>
 
       <h2>Source</h2>
       <p>
@@ -56,8 +56,8 @@
       import hashColor from './hash-color.js';
 
       const form = document.querySelector('form');
-      const style = document.querySelector('button').style;
-      const output = document.querySelector('button pre');
+      const style = document.querySelector('aside').style;
+      const output = document.querySelector('aside pre');
 
       form.addEventListener('submit', (evt) => {
         evt.preventDefault();

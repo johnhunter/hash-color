@@ -32,7 +32,7 @@ input[type='text'] {
   width: 100%;
 }
 
-button {
+aside {
   display: block;
   width: 100%;
   appearance: none;
@@ -41,6 +41,7 @@ button {
   border-radius: 1rem;
   margin: 4rem auto;
   font-size: 2rem;
+  text-align: center;
 
   transition: all 200ms linear;
 
