@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hash-color</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Hash-color</h1>
+
+      <p>
+        This example uses hash-color.js to generate unique colour values for a
+        given text. You might use email or name to create a unique user colour.
+      </p>
+
+      <form>
+        <label>
+          <span>Input text</span>
+          <input
+            type="text"
+            name="text"
+            value="Hello world!"
+            autocomplete="off"
+            autocapitalize="off"
+            autofocus
+          />
+        </label>
+        <label>
+          <span>Saturation %</span>
+          <input type="range" name="saturation" min="0" max="100" />
+        </label>
+        <label>
+          <span>Lightness %</span>
+          <input type="range" name="lightness" min="0" max="100" />
+        </label>
+      </form>
+
+      <button>
+        Hash color
+        <pre></pre>
+      </button>
+
+      <h2>Source</h2>
+      <p>
+        <a href="./hash-color.js" download>Download hash-color.js</a> or copy
+        from below
+      </p>
+      <iframe id="source-code" src="./hash-color.js"></iframe>
+    </main>
+    <script type="module">
+      import hashColor from './hash-color.js';
+
+      const form = document.querySelector('form');
+      const style = document.querySelector('button').style;
+      const output = document.querySelector('button pre');
+
+      form.addEventListener('submit', (evt) => {
+        evt.preventDefault();
+      });
+
+      form.addEventListener('input', setStyle);
+      setStyle();
+
+      function setStyle() {
+        const { saturation, lightness, text } = form.elements;
+        const lValue = Number(lightness.value);
+        const sValue = Number(saturation.value);
+
+        const color = hashColor(sValue, lValue)(text.value);
+
+        output.innerHTML = color;
+
+        style.backgroundColor = color;
+        style.color = lValue > 75 ? 'rgb(0,0,0,.8)' : 'rgb(255,255,255,.8)';
+      }
+    </script>
+  </body>
+</html>
