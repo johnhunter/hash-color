@@ -1,3 +1,3 @@
 # Hash-color
 
-Generate unique css colour value for a given text value.
+Generate unique css colour value for a given text value. See the [example page here](johnhunter.github.io/hash-color/).
