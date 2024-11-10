@@ -5,6 +5,8 @@
  * returns a function that generates a unique css `hsl`
  * color value for a given text.
  *
+ * @license MIT https://github.com/johnhunter/hash-color
+ *
  * @param {number} saturation
  * @param {number} lightness
  * @returns {(text: string) => string}
