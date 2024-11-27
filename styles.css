@@ -17,7 +17,7 @@ form {
 
 label {
   display: grid;
-  grid-template-columns: 10rem 1fr;
+  grid-template-columns: 12ch 1fr;
   align-items: center;
 
   span {
@@ -34,7 +34,6 @@ input[type='text'] {
 
 aside {
   display: block;
-  width: 100%;
   appearance: none;
   padding: 1rem;
   border: none;
@@ -42,7 +41,6 @@ aside {
   margin: 4rem auto;
   font-size: 2rem;
   text-align: center;
-
   transition: all 200ms linear;
 
   pre {

@@ -12,13 +12,13 @@
  * @returns {(text: string) => string}
  */
 const hashColor = (saturation, lightness) => (text) => {
-  let hash = 0;
-  for (let i = 0; i < text.length; i++) {
-    hash = text.charCodeAt(i) + ((hash << 5) - hash);
-  }
+  const hash = Array.from(text).reduce(
+    (acc, char) => char.charCodeAt(0) + ((acc << 5) - acc),
+    0
+  );
 
   const hue = hash % 360;
-  return `hsl(${hue}deg, ${saturation}%, ${lightness}%)`;
+  return `hsl(${hue}deg,${saturation}%,${lightness}%)`;
 };
 
 export default hashColor;
