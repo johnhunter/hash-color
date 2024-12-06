@@ -1,87 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hash-color</title>
-    <link rel="stylesheet" href="./styles.css" />
-  </head>
-  <body>
-    <main>
-      <h1>Hash-color</h1>
-      <p>
-        This example uses hash-color.js to generate unique colour values for a
-        given text. For example you might use email or name to create a unique user colour.
-      </p>
-      <p>
-        Using a consistent saturation and lightness helps to avoid clashing
-        or ugliness with your existing theme.
-      </p>
 
-      <form>
-        <label>
-          <span>Input text</span>
-          <input
-            type="text"
-            name="text"
-            value="Hello world!"
-            autocomplete="off"
-            autocapitalize="off"
-            autofocus
-          />
-        </label>
-        <label>
-          <span>Saturation %</span>
-          <input type="range" name="saturation" min="0" max="100" />
-        </label>
-        <label>
-          <span>Lightness %</span>
-          <input type="range" name="lightness" min="0" max="100" />
-        </label>
-      </form>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hash-color</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
 
-      <aside role="region" aria-live="polite">
-        Hash color
-        <pre></pre>
-      </aside>
+<body>
+  <main>
+    <h1>Hash-color</h1>
+    <p>
+      This example uses hash-color.js to generate unique colour values for a
+      given text. For example you might use email or name to create a unique user colour.
+    </p>
+    <p>
+      Using a consistent saturation and lightness helps to avoid clashing
+      or ugliness with your existing theme.
+    </p>
 
-      <h2>Source</h2>
-      <p>
-        The source is available at
-        <a href="https://github.com/johnhunter/hash-color"
-          >github.com/johnhunter/hash-color</a
-        >
-        or you can
-        <a href="./hash-color.js" download>download</a> / copy from below.
-      </p>
-      <iframe id="source-code" src="./hash-color.js"></iframe>
-    </main>
-    <script type="module">
-      import hashColor from './hash-color.js';
+    <form>
+      <label>
+        <span>Input text</span>
+        <input type="text" name="text" value="Hello world!" autocomplete="off" autocapitalize="off" autofocus />
+      </label>
+      <label>
+        <span>Saturation %</span>
+        <input type="range" name="saturation" min="0" max="100" step="1" />
+      </label>
+      <label>
+        <span>Lightness %</span>
+        <input type="range" name="lightness" min="0" max="100" step="1" />
+      </label>
+    </form>
 
-      const form = document.querySelector('form');
-      const style = document.querySelector('aside').style;
-      const output = document.querySelector('aside pre');
+    <aside class="big-pill" role="region" aria-live="polite">
+      Hash color
+      <pre></pre>
+    </aside>
 
-      form.addEventListener('submit', (evt) => {
-        evt.preventDefault();
-      });
 
-      form.addEventListener('input', setStyle);
-      setStyle();
+    <details>
+      <summary><b class="title">The code</b></summary>
+      <div>
+        <p>
+          The source is available at
+          <a href="https://github.com/johnhunter/hash-color">github.com/johnhunter/hash-color</a>
+          or you can
+          <a href="./hash-color.js" download>download</a> / copy from below.
+        </p>
+        <iframe id="source-code" src="./hash-color.js"></iframe>
 
-      function setStyle() {
-        const { saturation, lightness, text } = form.elements;
-        const lValue = Number(lightness.value);
-        const sValue = Number(saturation.value);
+        <aside>
+          <dl>
+            <dt>What's the <code>((acc << 5) - acc</code> thing?</dt>
+            <dd>This hashing algorithm uses bit shifting to generate
+              a unique value for the given text. You can read more about it in
+              <a href="https://stackoverflow.com/questions/51960331/why-5-bit-left-shift-in-hashing-function">this SO
+                post</a>.
+            </dd>
+          </dl>
+        </aside>
+      </div>
+    </details>
 
-        const color = hashColor(sValue, lValue)(text.value);
+  </main>
+  <script type="module">
+    import hashColor from './hash-color.js';
 
-        output.innerHTML = color;
+    const form = document.querySelector('form');
+    const style = document.querySelector('aside').style;
+    const output = document.querySelector('aside pre');
 
-        style.backgroundColor = color;
-        style.color = lValue > 75 ? 'rgb(0,0,0,.8)' : 'rgb(255,255,255,.8)';
-      }
-    </script>
-  </body>
+    form.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+    });
+
+    form.addEventListener('input', setStyle);
+    setStyle();
+
+    function setStyle() {
+      const { saturation, lightness, text } = form.elements;
+      const lValue = Number(lightness.value);
+      const sValue = Number(saturation.value);
+
+      const color = hashColor(sValue, lValue)(text.value);
+
+      output.innerHTML = color;
+
+      style.backgroundColor = color;
+      style.color = lValue > 70 ? 'rgb(0,0,0,.8)' : 'rgb(255,255,255,.8)';
+    }
+  </script>
+</body>
+
 </html>
